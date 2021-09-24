@@ -12,7 +12,7 @@ RUN addgroup -S -g 1000 user && \
     adduser -S -u 1000 -g user user
 RUN go build -v -o /app/kuberhealthy
 
-FROM docker-hub-remote.dr.corp.adobe.com/scratch
+FROM scratch
 WORKDIR /app
 COPY --from=builder /app /app
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
