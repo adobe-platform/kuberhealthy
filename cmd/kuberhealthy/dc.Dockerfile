@@ -8,8 +8,8 @@ ENV CGO_ENABLED=0
 RUN go version
 RUN go test -v
 RUN mkdir /app
-RUN groupadd -g 999 user && \
-    useradd -r -u 999 -g user user
+RUN addgroup -S -g 1000 user && \
+    adduser -S -u 1000 -g user user
 RUN go build -v -o /app/kuberhealthy
 
 FROM docker-hub-remote.dr.corp.adobe.com/scratch
