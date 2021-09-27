@@ -3,7 +3,10 @@
 BINARY        ?= kuberhealthy
 VERSION       ?= $(shell git describe --tags --always --dirty)
 IMAGE         ?= docker-adobesign-govcloud-forks-release.dr.corp.adobe.com/kuberhealthy/$(BINARY)
-TAG           ?= ${VERSION}-dc
+TAG           ?= ${VERSION}
+DOCKERFILE    ?= dc.Dockerfile
+
+default: build.docker
 
 build.docker:
-	docker build -t ${IMAGE}:${TAG} -f dc.Dockerfile ../../
+	docker build --rm -t ${IMAGE}:${TAG} -f $(DOCKERFILE) --build-arg VERSION=$(VERSION) ../../
